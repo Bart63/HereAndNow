@@ -127,6 +127,12 @@ code {
   padding: 20px;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+
 .rooms-list {
   z-index: 3000;
   width: 300px;

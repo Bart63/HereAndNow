@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Paper, TextField, Button } from "@material-ui/core";
 import Shadow from "./Shadow";
 
-export default class AddEventForm extends Component {
-  render() {
+const AddEventForm = ({ onCancel }) => {
     return (
       <>
         <Shadow />
@@ -12,23 +11,18 @@ export default class AddEventForm extends Component {
             <div>
               <TextField
                 id="standard-basic"
-                label="Nazwa wydarzenia"
-                size="big"
+                label="Room name"
               />
             </div>
-            <div>
-              <TextField id="standard-basic" label="x" />
-            </div>
-            <div>
-              <TextField id="standard-basic" label="y" />
-            </div>
 
-            <div>
-              <Button variant="contained">Dodaj</Button>
+            <div className="flex" style={{marginTop: 10}}>
+              <Button color="primary" variant="contained">Add</Button>
+              <Button variant="contained" onClick={onCancel}>Cancel</Button>
             </div>
           </form>
         </Paper>
       </>
     );
   }
-}
+
+  export default AddEventForm;
