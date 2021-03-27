@@ -17,12 +17,12 @@ function App() {
   const [addingEventY, setAddingEventY] = useState(0);
 
   // Get rooms from server
-  useEffect(() => {
-    const getRooms = async () => {
-      const roomsFromServer = await fetchRooms();
-      setRooms(roomsFromServer);
-    };
+  const getRooms = async () => {
+    const roomsFromServer = await fetchRooms();
+    setRooms(roomsFromServer);
+  };
 
+  useEffect(() => {
     getRooms();
   }, []);
 
@@ -31,6 +31,28 @@ function App() {
     const data = await res.json();
     return data;
   };
+
+  const addRoom = async (name) => {
+    
+    const room = {
+      name: name,
+      password: '',
+      position_x: addingEventX,
+      position_y: addingEventY,
+    }
+
+    console.log(JSON.stringify(room))
+
+    const res = await fetch("http://localhost:5000/rooms/add", {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(room)
+    });
+
+    await getRooms();
+  }
 
   // Get messages from server
   const getMessages = async (id) => {
@@ -67,11 +89,10 @@ function App() {
 
   const cancelAddingEvent = () => {
     setAddingEvent(0);
-    console.log(addingEvent)
   }
 
   const addEventClick = () => {
-    setAddingEvent(!addingEvent);
+    setAddingEvent(addingEvent === 0 ? 1 : 0);
   };
 
   const showEventsClick = () => {
@@ -89,8 +110,7 @@ function App() {
           onAddEventClick={addEventClick}
           onShowEventsClick={showEventsClick}
         />
-        {addingEvent === 2 && <AddEventForm onCancel={cancelAddingEvent} />}
-        {roomsList ? <RoomsList rooms={rooms} /> : null}
+        {addingEvent === 2 && <AddEventForm onCancel={cancelAddingEvent} onAdd={addRoom} />}
       </div>
     </div>
   );

@@ -1,22 +1,39 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Paper, TextField, Button } from "@material-ui/core";
 import Shadow from "./Shadow";
 
-const AddEventForm = ({ onCancel }) => {
-    return (
+const AddEventForm = ({ onCancel, onAdd }) => {
+  const [text, setText] = useState('');
+  
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (!text) {
+      alert('Missing name')
+      return
+    }
+
+    onAdd(text)
+
+    setText('')
+  }  
+  
+  return (
       <>
         <Shadow />
         <Paper elevation={3} className="add-form">
-          <form>
+          <form onSubmit={onSubmit}>
             <div>
               <TextField
                 id="standard-basic"
                 label="Room name"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
               />
             </div>
 
             <div className="flex" style={{marginTop: 10}}>
-              <Button color="primary" variant="contained">Add</Button>
+              <Button color="primary" variant="contained" type="submit">Add</Button>
               <Button variant="contained" onClick={onCancel}>Cancel</Button>
             </div>
           </form>
