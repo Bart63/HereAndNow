@@ -36,6 +36,16 @@ code {
   height: 100vh;
 }
 
+.pass {
+  width: 400px;
+  z-index: 1500;
+}
+
+.pass .message {
+  padding: 10px;
+  display: flex;
+}
+
 .chat {
   width: 400px;
   z-index: 1500;
@@ -46,6 +56,10 @@ code {
   height: 600px;
   display: flex;
   flex-direction: column;
+}
+
+.message button {
+  margin-left: 10px;
 }
 
 .chat > div > div:not(.content) {
@@ -67,7 +81,8 @@ code {
   margin: 10px;
 }
 
-.chat > div > .message button > span > span {
+.chat > div > .message button > span > span,
+.pass > div > .message button > span > span {
   margin: 0;
 }
 
