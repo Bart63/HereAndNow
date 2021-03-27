@@ -126,3 +126,12 @@ code {
 .add-form > div {
   padding: 20px;
 }
+
+.rooms-list {
+  z-index: 3000;
+  width: 300px;
+  height: 80%;
+  position: absolute;
+  right: 20px;
+  background-color: white;
+}

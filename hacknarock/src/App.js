@@ -11,7 +11,7 @@ function App() {
   const [chatID, setChatID] = useState(-1);
   const [chatName, setChatName] = useState("");
   const [messages, setMessages] = useState([]);
-  const [roomsList, setRoomsList] = useState(false);
+  const [roomsList, setRoomsList] = useState(true);
   const [addingEvent, setAddingEvent] = useState(false);
 
   // Get rooms from server
@@ -75,7 +75,7 @@ function App() {
           onShowEventsClick={showEventsClick}
         />
         {addingEvent ? <AddEventForm /> : null}
-        {roomsList ? <RoomsList /> : null}
+        {roomsList ? <RoomsList rooms={rooms} /> : null}
       </div>
     </div>
   );
