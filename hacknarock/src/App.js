@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { Button } from "@material-ui/core";
 import Map from "./components/Map";
 import Chat from "./components/Chat";
 import ButtonsContainer from "./components/ButtonsContainer";
@@ -10,15 +9,16 @@ function App() {
   const [rooms, setRooms] = useState([])
   const [chatID, setChatID] = useState(-1)
   const [chatName, setChatName] = useState('')
+  const [messages, setMessages] = useState([])
 
   // Get rooms from server
   useEffect(() => {
-    const getTasks = async () => {
+    const getRooms = async () => {
       const roomsFromServer = await fetchRooms()
       setRooms(roomsFromServer)
     }
 
-    getTasks()
+    getRooms()
   }, [])
 
   const fetchRooms = async () => {
@@ -27,9 +27,22 @@ function App() {
     return data
   }
 
+  // Get messages from server
+  const getMessages = async (id) => {
+    const messagesFromServer = await fetchMessages(id)
+    setMessages(messagesFromServer)
+  }
+
+  const fetchMessages = async (id) => {
+    const res = await fetch('http://localhost:5000/messages/' + id)
+    const data = await res.json()
+    return data
+  }  
+
   // Chat state
   const showChat = (id, name) => {
     console.log(id);
+    getMessages(id)
     setChatID(id)
     setChatName(name)
   }
