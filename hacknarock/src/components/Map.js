@@ -10,10 +10,13 @@ const Map = ({ rooms, onClick, addingEvent, onMapClick }) => {
         center={[50.049683, 19.944544]}
         zoom={13}
         scrollWheelZoom={true}
+		animate={true}
+		easeLinearity={0.35}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+		  noWrap={true}
         />
 
 		<MapConsumer>
