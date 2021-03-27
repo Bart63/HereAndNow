@@ -3,62 +3,79 @@ import React, { useState, useEffect } from "react";
 import Map from "./components/Map";
 import Chat from "./components/Chat";
 import ButtonsContainer from "./components/ButtonsContainer";
+import AddEventForm from "./components/AddEventForm";
+import RoomsList from "./components/RoomsList";
 
 function App() {
-
-  const [rooms, setRooms] = useState([])
-  const [chatID, setChatID] = useState(-1)
-  const [chatName, setChatName] = useState('')
-  const [messages, setMessages] = useState([])
+  const [rooms, setRooms] = useState([]);
+  const [chatID, setChatID] = useState(-1);
+  const [chatName, setChatName] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [roomsList, setRoomsList] = useState(false);
+  const [addingEvent, setAddingEvent] = useState(false);
 
   // Get rooms from server
   useEffect(() => {
     const getRooms = async () => {
-      const roomsFromServer = await fetchRooms()
-      setRooms(roomsFromServer)
-    }
+      const roomsFromServer = await fetchRooms();
+      setRooms(roomsFromServer);
+    };
 
-    getRooms()
-  }, [])
+    getRooms();
+  }, []);
 
   const fetchRooms = async () => {
-    const res = await fetch('http://localhost:5000/rooms')
-    const data = await res.json()
-    return data
-  }
+    const res = await fetch("http://localhost:5000/rooms");
+    const data = await res.json();
+    return data;
+  };
 
   // Get messages from server
   const getMessages = async (id) => {
-    const messagesFromServer = await fetchMessages(id)
-    setMessages(messagesFromServer)
-  }
+    const messagesFromServer = await fetchMessages(id);
+    setMessages(messagesFromServer);
+  };
 
   const fetchMessages = async (id) => {
-    const res = await fetch('http://localhost:5000/messages/' + id)
-    const data = await res.json()
-    return data
-  }  
+    const res = await fetch("http://localhost:5000/messages/" + id);
+    const data = await res.json();
+    return data;
+  };
 
   // Chat state
   const showChat = (id, name) => {
     console.log(id);
-    getMessages(id)
-    setChatID(id)
-    setChatName(name)
-  }
+
+    getMessages(id);
+    setChatID(id);
+    setChatName(name);
+  };
 
   const hideChat = () => {
-    setChatID(-1)
+    setChatID(-1);
     console.log(-1);
-  }
+  };
+
+  const addEventClick = () => {
+    setAddingEvent(!addingEvent);
+  };
+
+  const showEventsClick = () => {
+    setRoomsList(!roomsList);
+  };
 
   // Components
   return (
     <div>
       <div className="wrapper">
         <Map rooms={rooms} onClick={showChat} />
-        { chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} /> }
-        <ButtonsContainer />
+        {chatID !== -1 && <Chat onHide={hideChat} name={chatName} />}
+        <ButtonsContainer
+          onAddEventClick={addEventClick}
+          onShowEventsClick={showEventsClick}
+        />
+        {addingEvent ? <AddEventForm /> : null}
+        {roomsList ? <RoomsList /> : null}
       </div>
     </div>
   );
