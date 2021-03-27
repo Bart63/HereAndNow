@@ -40,6 +40,16 @@ code {
   height: 100vh;
 }
 
+.pass {
+  width: 400px;
+  z-index: 1500;
+}
+
+.pass .message {
+  padding: 10px;
+  display: flex;
+}
+
 .chat {
   width: 400px;
   z-index: 1500;
@@ -50,6 +60,10 @@ code {
   height: 600px;
   display: flex;
   flex-direction: column;
+}
+
+.message button {
+  margin-left: 10px;
 }
 
 .chat > div > div:not(.content) {
@@ -71,7 +85,8 @@ code {
   margin: 10px;
 }
 
-.chat > div > .message button > span > span {
+.chat > div > .message button > span > span,
+.pass > div > .message button > span > span {
   margin: 0;
 }
 
@@ -83,7 +98,7 @@ code {
 }
 
 .shadow {
-  z-index: 1000;
+  z-index: 1200;
   background-color: black;
   opacity: 0.7;
   width: 100%;
@@ -94,14 +109,10 @@ code {
 }
 
 .btn-container {
-  z-index: 2000;
+  z-index: 1000;
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 300px;
-  height: 200px;
-  top: 100;
-  right: 100;
 }
 
 .btn {
