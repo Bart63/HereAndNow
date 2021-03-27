@@ -33,6 +33,17 @@ def add_room():
 def get_users():
     return jsonify([*map(User.serialize, User.query.all())])
 
+
+@app.route("/users/add", methods=['POST'])
+def add_user():
+    data = json.loads(request.data)
+    user_name = data['name']
+    #TODO VALIDATE
+    new_user = User(name=user_name)
+    db.session.add(new_user)
+    db.session.commit()
+    return make_response("User Added", 200)
+
  
 @app.route("/roomusers")
 def get_room_users():
