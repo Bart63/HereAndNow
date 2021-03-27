@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, json, request, make_response
+from sqlalchemy.orm import load_only
 from database import db, Room, User, RoomUser, Message
 from flask_cors import CORS
 
@@ -48,6 +49,13 @@ def add_user():
 @app.route("/roomusers")
 def get_room_users():
     return jsonify([*map(RoomUser.serialize, RoomUser.query.all())])
+
+
+@app.route("/roomusers/<_room_id>")
+def get_room_users_by_room_id(_room_id):
+    user_ids = [r.user_id for r in RoomUser.query.options(load_only("user_id")).filter_by(room_id=_room_id)]
+    user_names = [u.name for u in User.query.filter(User.id.in_(user_ids))]
+    return jsonify(user_names)
 
 
 @app.route("/messages")
