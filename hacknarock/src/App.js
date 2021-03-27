@@ -11,7 +11,7 @@ function App() {
   const [chatID, setChatID] = useState(-1);
   const [chatName, setChatName] = useState("");
   const [messages, setMessages] = useState([]);
-  const [roomsList, setRoomsList] = useState(false);
+  const [roomsList, setRoomsList] = useState(true);
   const [addingEvent, setAddingEvent] = useState(0);
   const [addingEventX, setAddingEventX] = useState(0);
   const [addingEventY, setAddingEventY] = useState(0);
@@ -90,7 +90,7 @@ function App() {
           onShowEventsClick={showEventsClick}
         />
         {addingEvent === 2 && <AddEventForm onCancel={cancelAddingEvent} />}
-        {roomsList ? <RoomsList /> : null}
+        {roomsList ? <RoomsList rooms={rooms} /> : null}
       </div>
     </div>
   );

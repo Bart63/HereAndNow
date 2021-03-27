@@ -132,3 +132,12 @@ code {
   align-items: center;
   justify-content:space-between;
 }
+
+.rooms-list {
+  z-index: 3000;
+  width: 300px;
+  height: 80%;
+  position: absolute;
+  right: 20px;
+  background-color: white;
+}

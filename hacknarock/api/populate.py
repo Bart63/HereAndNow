@@ -20,6 +20,8 @@ if __name__=="__main__":
                         position_x=50.049683, position_y=19.944544, password=""))
         rooms.append(Room(name="Daily Scrum", 
                         position_x=-20, position_y=-2, password="scrum"))
+        rooms.append(Room(name="Empty?", 
+                        position_x=-60, position_y=-40, password=""))
         
         for room in rooms:
             db.session.add(room)
@@ -73,3 +75,4 @@ if __name__=="__main__":
         for m in messages:
             db.session.add(m)
         db.session.commit()
+        print("Database has been populated!")
