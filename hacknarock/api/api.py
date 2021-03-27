@@ -43,7 +43,7 @@ def add_user():
     new_user = User(name=user_name)
     db.session.add(new_user)
     db.session.commit()
-    return make_response("User Added", 200)
+    return make_response("User Added", 200, {'Id' : new_user.id})
 
  
 @app.route("/roomusers")
