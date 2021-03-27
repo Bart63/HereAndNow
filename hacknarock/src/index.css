@@ -44,14 +44,27 @@ code {
 .chat > div {
   width: 100%;
   height: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
-.chat > div > div {
+.chat > div > div:not(.content) {
   display: flex;
 }
 
-.chat > div > content {
+.chat > div > .content {
   flex-grow: 1;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  overflow-y: scroll;
+}
+
+.chat > div > .content > div {
+  position: relative;
+}
+
+.chat > div > .message {
+  margin: 10px;
 }
 
 .shadow {
