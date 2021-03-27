@@ -1,12 +1,16 @@
 import React from 'react';
-import "./App.css";
+
 import { Button } from '@material-ui/core';
 import Map from './components/Map'
+import Chat from './components/Chat'
 
 function App() {
   return (
     <div>
-      <Map />
+      <div className="wrapper">
+        <Map />
+        <Chat />
+      </div>
     </div>
   );
 }
