@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, MapConsumer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from "react-leaflet";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
@@ -18,7 +18,7 @@ const Map = ({ rooms, onClick, addingEvent, onMapClick }) => {
 
 		<MapConsumer>
 			{(map) => {
-				if (addingEvent)
+				if (addingEvent === 1)
 				{
 					map.on("click", function (e) {
 						const { lat, lng } = e.latlng;
