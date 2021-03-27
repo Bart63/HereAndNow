@@ -35,6 +35,12 @@ def get_users():
     return jsonify([*map(User.serialize, User.query.all())])
 
 
+@app.route("/users/<_user_id>")
+def get_user_name_by_user_id(_user_id):
+    user = User.query.filter_by(id=_user_id).first()
+    return jsonify(user.name)
+
+
 @app.route("/users/add", methods=['POST'])
 def add_user():
     data = json.loads(request.data)
@@ -43,7 +49,7 @@ def add_user():
     new_user = User(name=user_name)
     db.session.add(new_user)
     db.session.commit()
-    return make_response("User Added", 200)
+    return make_response("User Added", 200, {'Id' : new_user.id})
 
  
 @app.route("/roomusers")
