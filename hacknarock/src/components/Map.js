@@ -21,9 +21,9 @@ const Map = ({ rooms, onClick, addingEvent, onMapClick }) => {
 
 		<MapConsumer>
 			{(map) => {
-				map.locate({
+				/*map.locate({
 					setView: true
-				});
+				});*/
 
 				if (addingEvent === 1)
 				{
