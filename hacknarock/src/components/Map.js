@@ -1,14 +1,14 @@
+import { useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, MapConsumer } from "react-leaflet";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 const Map = ({ rooms, onClick, addingEvent, onMapClick }) => {
-
   return (
     <div className="map">
       <MapContainer
         center={[50.049683, 19.944544]}
-        zoom={13}
+        zoom={10}
         scrollWheelZoom={true}
 		animate={true}
 		easeLinearity={0.35}
@@ -21,6 +21,10 @@ const Map = ({ rooms, onClick, addingEvent, onMapClick }) => {
 
 		<MapConsumer>
 			{(map) => {
+				map.locate({
+					setView: true
+				});
+
 				if (addingEvent === 1)
 				{
 					map.on("click", function (e) {
