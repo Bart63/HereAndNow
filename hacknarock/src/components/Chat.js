@@ -49,7 +49,7 @@ const Chat = ({ onHide, name, messages }) => {
 
           <div className="content">
             {messages.map((message) => (
-              <Message author="" msg="" date="" />
+              <Message key={message.id} author={message.author_id} msg={message.data} date={message.creationDate} />
             ))}
           </div>
 

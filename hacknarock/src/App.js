@@ -43,10 +43,10 @@ function App() {
   };
 
   // Chat state
-  const showChat = (id, name) => {
+  const showChat = async (id, name) => {
     console.log(id);
 
-    getMessages(id);
+    await getMessages(id);
     setChatID(id);
     setChatName(name);
   };
