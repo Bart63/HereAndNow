@@ -11,16 +11,18 @@ function App() {
   const [chatID, setChatID] = useState(-1);
   const [chatName, setChatName] = useState("");
   const [messages, setMessages] = useState([]);
-  const [roomsList, setRoomsList] = useState(false);
-  const [addingEvent, setAddingEvent] = useState(false);
+  const [roomsList, setRoomsList] = useState(true);
+  const [addingEvent, setAddingEvent] = useState(0);
+  const [addingEventX, setAddingEventX] = useState(0);
+  const [addingEventY, setAddingEventY] = useState(0);
 
   // Get rooms from server
-  useEffect(() => {
-    const getRooms = async () => {
-      const roomsFromServer = await fetchRooms();
-      setRooms(roomsFromServer);
-    };
+  const getRooms = async () => {
+    const roomsFromServer = await fetchRooms();
+    setRooms(roomsFromServer);
+  };
 
+  useEffect(() => {
     getRooms();
   }, []);
 
@@ -29,6 +31,28 @@ function App() {
     const data = await res.json();
     return data;
   };
+
+  const addRoom = async (name) => {
+    
+    const room = {
+      name: name,
+      password: '',
+      position_x: addingEventX,
+      position_y: addingEventY,
+    }
+
+    console.log(JSON.stringify(room))
+
+    const res = await fetch("http://localhost:5000/rooms/add", {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(room)
+    });
+
+    await getRooms();
+  }
 
   // Get messages from server
   const getMessages = async (id) => {
@@ -43,10 +67,10 @@ function App() {
   };
 
   // Chat state
-  const showChat = (id, name) => {
+  const showChat = async (id, name) => {
     console.log(id);
 
-    getMessages(id);
+    await getMessages(id);
     setChatID(id);
     setChatName(name);
   };
@@ -57,8 +81,18 @@ function App() {
   };
 
   // Adding state
+  const addEventDone = (lat, lng) => {
+    setAddingEventX(lat);
+    setAddingEventY(lng);
+    setAddingEvent(2);
+  };
+
+  const cancelAddingEvent = () => {
+    setAddingEvent(0);
+  }
+
   const addEventClick = () => {
-    setAddingEvent(!addingEvent);
+    setAddingEvent(addingEvent === 0 ? 1 : 0);
   };
 
   const showEventsClick = () => {
@@ -69,14 +103,14 @@ function App() {
   return (
     <div>
       <div className="wrapper">
-        <Map rooms={rooms} onClick={showChat} />
+        <Map rooms={rooms} onClick={showChat} addingEvent={addingEvent} onMapClick={addEventDone} />
         {chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} />}
         <ButtonsContainer
+          addingEvent={addingEvent}
           onAddEventClick={addEventClick}
           onShowEventsClick={showEventsClick}
         />
-        {addingEvent ? <AddEventForm /> : null}
-        {roomsList ? <RoomsList /> : null}
+        {addingEvent === 2 && <AddEventForm onCancel={cancelAddingEvent} onAdd={addRoom} />}
       </div>
     </div>
   );

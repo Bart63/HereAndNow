@@ -17,14 +17,12 @@ const Message = (props) => {
 
 	return (
 
-		<div className={classes.root}>
-			<div>Anonymous:</div>
+		<div key={props.id} className={classes.root}>
+			<div>{props.author}</div>
 			<Paper className={classes.msg} elevation={1} style={{backgroundColor: '#757ce8'}}>
-
-				Hello!
-
+				{props.msg}
 			</Paper>
-			<div className="date">11-20-2020</div>
+			<div className="date">{props.date}</div>
 		</div>
 	)
 }
