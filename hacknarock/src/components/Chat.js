@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Chat = ({ onHide }) => {
+const Chat = ({ onHide, name }) => {
 	const classes = useStyles();
 
 	return (
@@ -33,7 +33,7 @@ const Chat = ({ onHide }) => {
 						<AppBar position="static">
 							<Toolbar>
 								<Typography variant="h6" className={classes.title}>
-									Chat
+									{name}
 								</Typography>
 								<IconButton color="inherit" aria-label="close" className={classes.menuButton} onClick={onHide}>
 									<CloseIcon />

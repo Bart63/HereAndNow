@@ -1,19 +1,29 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-const Map = ({ onClick }) => {
+const Map = ({ rooms, onClick }) => {
 	return (
 			<div className="map">
-			<MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
+			<MapContainer center={[50.049683, 19.944544]} zoom={13} scrollWheelZoom={true}>
 			<TileLayer
 				attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
-			<Marker position={[51.505, -0.09]}>
-				<Popup>
-					<Button variant="contained" color="primary" onClick={() => onClick(1)}>Connect</Button>
-				</Popup>
-			</Marker>
+			
+			{rooms.map((task) => (
+
+				<Marker key={task.id} position={[task.position_x, task.position_y]}>
+					<Popup>
+						<Typography variant="h6">
+							{task.name}
+						</Typography>
+						<Button variant="contained" color="primary" onClick={() => onClick(task.id, task.name)}>Connect</Button>
+					</Popup>
+				</Marker>
+
+			))}
+
 			</MapContainer>
 		</div>
 	)

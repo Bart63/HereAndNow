@@ -24,6 +24,7 @@ const Message = () => {
 				Hello!
 
 			</Paper>
+			<div className="date">11-20-2020</div>
 		</div>
 	)
 }
