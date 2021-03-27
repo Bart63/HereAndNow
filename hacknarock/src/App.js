@@ -43,10 +43,10 @@ function App() {
   };
 
   // Chat state
-  const showChat = (id, name) => {
+  const showChat = async (id, name) => {
     console.log(id);
 
-    getMessages(id);
+    await getMessages(id);
     setChatID(id);
     setChatName(name);
   };
@@ -56,6 +56,7 @@ function App() {
     console.log(-1);
   };
 
+  // Adding state
   const addEventClick = () => {
     setAddingEvent(!addingEvent);
   };
@@ -69,7 +70,7 @@ function App() {
     <div>
       <div className="wrapper">
         <Map rooms={rooms} onClick={showChat} />
-        {chatID !== -1 && <Chat onHide={hideChat} name={chatName} />}
+        {chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} />}
         <ButtonsContainer
           onAddEventClick={addEventClick}
           onShowEventsClick={showEventsClick}
