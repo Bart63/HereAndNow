@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -12,9 +12,15 @@ class Event(db.Model):
     def __str__(self):
         return f'{self.id} {self.title}'
 
-@app.route("/")
-def hello():
-    return "Hello flaskxD"
+def event_serializer(event):
+    return {
+        'id' : event.id,
+        'title' : event.title
+    }
+
+@app.route("/events")
+def showEvents():
+    return jsonify([*map(event_serializer, Event.query.all())])
 
 if __name__ == "__main__":
     app.run()
