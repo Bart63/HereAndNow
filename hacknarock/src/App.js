@@ -12,7 +12,9 @@ function App() {
   const [chatName, setChatName] = useState("");
   const [messages, setMessages] = useState([]);
   const [roomsList, setRoomsList] = useState(false);
-  const [addingEvent, setAddingEvent] = useState(false);
+  const [addingEvent, setAddingEvent] = useState(0);
+  const [addingEventX, setAddingEventX] = useState(0);
+  const [addingEventY, setAddingEventY] = useState(0);
 
   // Get rooms from server
   useEffect(() => {
@@ -57,6 +59,17 @@ function App() {
   };
 
   // Adding state
+  const addEventDone = (lat, lng) => {
+    setAddingEventX(lat);
+    setAddingEventY(lng);
+    setAddingEvent(2);
+  };
+
+  const cancelAddingEvent = () => {
+    setAddingEvent(0);
+    console.log(addingEvent)
+  }
+
   const addEventClick = () => {
     setAddingEvent(!addingEvent);
   };
@@ -69,13 +82,14 @@ function App() {
   return (
     <div>
       <div className="wrapper">
-        <Map rooms={rooms} onClick={showChat} />
+        <Map rooms={rooms} onClick={showChat} addingEvent={addingEvent} onMapClick={addEventDone} />
         {chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} />}
         <ButtonsContainer
+          addingEvent={addingEvent}
           onAddEventClick={addEventClick}
           onShowEventsClick={showEventsClick}
         />
-        {addingEvent ? <AddEventForm /> : null}
+        {addingEvent === 2 && <AddEventForm onCancel={cancelAddingEvent} />}
         {roomsList ? <RoomsList /> : null}
       </div>
     </div>

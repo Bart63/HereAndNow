@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents, MapConsumer } fro
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const Map = ({ rooms, onClick }) => {
+const Map = ({ rooms, onClick, addingEvent, onMapClick }) => {
 
   return (
     <div className="map">
@@ -18,11 +18,14 @@ const Map = ({ rooms, onClick }) => {
 
 		<MapConsumer>
 			{(map) => {
-			map.on("click", function (e) {
-				const { lat, lng } = e.latlng;
-				console.log(lat, lng)
-			});
-			return null;
+				if (addingEvent)
+				{
+					map.on("click", function (e) {
+						const { lat, lng } = e.latlng;
+						onMapClick(lat, lng)
+					});
+				}
+				return null;
 			}}
 		</MapConsumer>
 

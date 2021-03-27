@@ -126,3 +126,9 @@ code {
 .add-form > div {
   padding: 20px;
 }
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
