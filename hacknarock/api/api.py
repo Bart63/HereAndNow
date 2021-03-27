@@ -1,10 +1,11 @@
 from flask import Flask, jsonify
 from database import db, Room, User, RoomUser, Message
-
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+CORS(app)
 db.init_app(app)
 
 
