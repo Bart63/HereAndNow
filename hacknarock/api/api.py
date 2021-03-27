@@ -1,26 +1,32 @@
 from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from database import db, Room, User, RoomUser, Message
+
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-db = SQLAlchemy(app)
+db.init_app(app)
 
-class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Text, nullable=False)
 
-    def __str__(self):
-        return f'{self.id} {self.title}'
+@app.route("/rooms")
+def show_rooms():
+    return jsonify([*map(Room.serialize, Room.query.all())])
 
-def event_serializer(event):
-    return {
-        'id' : event.id,
-        'title' : event.title
-    }
 
-@app.route("/events")
-def showEvents():
-    return jsonify([*map(event_serializer, Event.query.all())])
+@app.route("/users")
+def show_users():
+    return jsonify([*map(User.serialize, User.query.all())])
+
+    
+@app.route("/roomusers")
+def show_room_users():
+    return jsonify([*map(RoomUser.serialize, RoomUser.query.all())])
+
+
+@app.route("/messages")
+def show_messages():
+    return jsonify([*map(Message.serialize, Message.query.all())])
+
 
 if __name__ == "__main__":
     app.run()
