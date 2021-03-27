@@ -18,7 +18,7 @@ const Message = () => {
 	return (
 
 		<div className={classes.root}>
-			Anonymous:
+			<div>Anonymous:</div>
 			<Paper className={classes.msg} elevation={1} style={{backgroundColor: '#757ce8'}}>
 
 				Hello!

@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import Button from '@material-ui/core/Button';
 
-const Map = (props) => {
+const Map = ({ onClick }) => {
 	return (
 			<div className="map">
 			<MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
@@ -11,7 +11,7 @@ const Map = (props) => {
 			/>
 			<Marker position={[51.505, -0.09]}>
 				<Popup>
-				<Button variant="contained" color="primary">Connect</Button>
+					<Button variant="contained" color="primary" onClick={() => onClick(1)}>Connect</Button>
 				</Popup>
 			</Marker>
 			</MapContainer>

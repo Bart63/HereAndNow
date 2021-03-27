@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
+import Button from '@material-ui/core/Button';
 import Shadow from './Shadow'
 import Message from './Message'
 
@@ -13,15 +14,12 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 	  flexGrow: 1,
 	},
-	menuButton: {
-	  marginRight: theme.spacing(0),
-	},
 	title: {
 	  flexGrow: 1,
 	},
 }));
 
-const Chat = () => {
+const Chat = ({ onHide }) => {
 	const classes = useStyles();
 
 	return (
@@ -37,7 +35,7 @@ const Chat = () => {
 								<Typography variant="h6" className={classes.title}>
 									Chat
 								</Typography>
-								<IconButton edge="center" color="inherit" aria-label="close" className={classes.menuButton}>
+								<IconButton color="inherit" aria-label="close" className={classes.menuButton} onClick={onHide}>
 									<CloseIcon />
 								</IconButton>
 							</Toolbar>
@@ -62,9 +60,14 @@ const Chat = () => {
 					<div className="message">
 
 						<TextField id="msg" label="Aa" variant="outlined" className={classes.root} />
-						<IconButton edge="center" color="primary" aria-label="send" className={classes.menuButton}>
-							<SendIcon />
-						</IconButton>
+
+						<Button
+							variant="contained"
+							color="primary"
+							startIcon={<SendIcon />}
+						/>
+
+
 					</div>
 
 				</Paper>
