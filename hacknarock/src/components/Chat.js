@@ -1,11 +1,13 @@
 import { Paper, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
-import Shadow from './Shadow'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import SendIcon from '@material-ui/icons/Send';
+import Shadow from './Shadow'
+import Message from './Message'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -35,7 +37,7 @@ const Chat = () => {
 								<Typography variant="h6" className={classes.title}>
 									Chat
 								</Typography>
-								<IconButton edge="start" color="inherit" aria-label="menu" className={classes.menuButton}>
+								<IconButton edge="center" color="inherit" aria-label="close" className={classes.menuButton}>
 									<CloseIcon />
 								</IconButton>
 							</Toolbar>
@@ -43,12 +45,26 @@ const Chat = () => {
 						</div>
 					</div>
 
-					<div className="content"></div>
+					<div className="content">
+
+						<Message />
+						<Message />
+						<Message />
+						<Message />
+						<Message />
+						<Message />
+						<Message />
+						<Message />
+						<Message />
+
+					</div>
 
 					<div className="message">
 
-						<TextField id="msg" label="Aa" variant="outlined" />
-
+						<TextField id="msg" label="Aa" variant="outlined" className={classes.root} />
+						<IconButton edge="center" color="primary" aria-label="send" className={classes.menuButton}>
+							<SendIcon />
+						</IconButton>
 					</div>
 
 				</Paper>
