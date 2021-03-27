@@ -85,8 +85,8 @@ code {
   margin: 10px;
 }
 
-.chat > div > .message button > span > span,
-.pass > div > .message button > span > span {
+.chat .message button > span > span,
+.pass .message button > span > span {
   margin: 0;
 }
 

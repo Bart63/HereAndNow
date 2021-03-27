@@ -9,7 +9,7 @@ const AddEventForm = ({ onCancel, onAdd }) => {
     e.preventDefault()
 
     if (!text) {
-      alert('Missing name')
+      alert('Name is required!')
       return
     }
 

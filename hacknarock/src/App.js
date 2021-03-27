@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Map from "./components/Map";
 import Chat from "./components/Chat";
 import ButtonsContainer from "./components/ButtonsContainer";
+import Login from "./components/Login";
 import AddEventForm from "./components/AddEventForm";
 import RoomsList from "./components/RoomsList";
 
@@ -12,9 +13,15 @@ function App() {
   const [chatName, setChatName] = useState("");
   const [messages, setMessages] = useState([]);
   const [roomsList, setRoomsList] = useState(true);
+  const [login, setLogin] = useState('');
   const [addingEvent, setAddingEvent] = useState(0);
   const [addingEventX, setAddingEventX] = useState(0);
   const [addingEventY, setAddingEventY] = useState(0);
+
+  // Login
+  const setLoginForm = (log) => {
+    setLogin(log)
+  };
 
   // Get rooms from server
   const getRooms = async () => {
@@ -32,6 +39,7 @@ function App() {
     return data;
   };
 
+  // Add room
   const addRoom = async (name) => {
     
     const room = {
@@ -105,11 +113,15 @@ function App() {
       <div className="wrapper">
         <Map rooms={rooms} onClick={showChat} addingEvent={addingEvent} onMapClick={addEventDone} />
         {chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} />}
+
         <ButtonsContainer
           addingEvent={addingEvent}
           onAddEventClick={addEventClick}
           onShowEventsClick={showEventsClick}
         />
+
+        {login === '' && <Login onSet={setLoginForm}/>}
+
         {addingEvent === 2 && <AddEventForm onCancel={cancelAddingEvent} onAdd={addRoom} />}
       </div>
     </div>
