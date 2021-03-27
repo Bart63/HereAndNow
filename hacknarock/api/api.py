@@ -18,7 +18,7 @@ def show_rooms():
 def show_users():
     return jsonify([*map(User.serialize, User.query.all())])
 
-    
+ 
 @app.route("/roomusers")
 def show_room_users():
     return jsonify([*map(RoomUser.serialize, RoomUser.query.all())])
@@ -27,6 +27,11 @@ def show_room_users():
 @app.route("/messages")
 def show_messages():
     return jsonify([*map(Message.serialize, Message.query.all())])
+
+
+@app.route("/messages/<_room_id>")
+def show_messages_by_room_id(_room_id):
+    return jsonify([*map(Message.serialize, Message.query.filter_by(room_id=_room_id))])
 
 
 if __name__ == "__main__":
