@@ -35,6 +35,12 @@ def get_users():
     return jsonify([*map(User.serialize, User.query.all())])
 
 
+@app.route("/users/<_user_id>")
+def get_user_name_by_user_id(_user_id):
+    user = User.query.filter_by(id=_user_id).first()
+    return jsonify(user.name)
+
+
 @app.route("/users/add", methods=['POST'])
 def add_user():
     data = json.loads(request.data)
