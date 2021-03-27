@@ -51,7 +51,7 @@ if __name__=="__main__":
             db.session.add(ru)
 
 
-        ############## RoomUser ##############
+        ############## Message ##############
         messages = []
         messages.append(Message(author_id=1, room_id=1, data="Hello world", 
         creationDate=datetime.datetime(2021, 3, 27, 16, 23, 12, 123)))
