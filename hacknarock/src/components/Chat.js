@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Chat = ({ onHide, name }) => {
+const Chat = ({ onHide, name, messages }) => {
 	const classes = useStyles();
 
 	return (
@@ -45,15 +45,9 @@ const Chat = ({ onHide, name }) => {
 
 					<div className="content">
 
-						<Message />
-						<Message />
-						<Message />
-						<Message />
-						<Message />
-						<Message />
-						<Message />
-						<Message />
-						<Message />
+					{messages.map((message) => (
+						<Message author="" msg="" date="" />
+					))}
 
 					</div>
 

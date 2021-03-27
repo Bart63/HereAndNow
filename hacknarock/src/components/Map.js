@@ -11,14 +11,14 @@ const Map = ({ rooms, onClick }) => {
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			
-			{rooms.map((task) => (
+			{rooms.map((room) => (
 
-				<Marker key={task.id} position={[task.position_x, task.position_y]}>
+				<Marker key={room.id} position={[room.position_x, room.position_y]}>
 					<Popup>
 						<Typography variant="h6">
-							{task.name}
+							{room.name}
 						</Typography>
-						<Button variant="contained" color="primary" onClick={() => onClick(task.id, task.name)}>Connect</Button>
+						<Button variant="contained" color="primary" onClick={() => onClick(room.id, room.name)}>Connect</Button>
 					</Popup>
 				</Marker>
 

@@ -57,7 +57,7 @@ function App() {
     <div>
       <div className="wrapper">
         <Map rooms={rooms} onClick={showChat} />
-        { chatID !== -1 && <Chat onHide={hideChat} name={chatName} /> }
+        { chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} /> }
         <ButtonsContainer />
       </div>
     </div>
