@@ -4,6 +4,7 @@ from sqlalchemy.orm import load_only
 from database import db, Room, User, RoomUser, Message
 from flask_cors import CORS
 from upload_api import upload_route
+from censor import censor
 
 
 app = Flask(__name__)
@@ -89,13 +90,13 @@ def add_message():
     data = json.loads(request.data)
     message_author_id = data['author_id']
     message_room_id = data['room_id']
-    message_data = data['data']
+    message_data = censor(data['data'])
     message_creation_date = datetime.datetime.utcnow()
     #TODO VALIDATE
     new_message = Message(author_id=message_author_id, room_id=message_room_id, data=message_data, creation_date=message_creation_date)
     db.session.add(new_message)
     db.session.commit()
-    return make_response("Message Added", 200)
+    return make_response(message_data, 200)
 
 
 @app.route("/messages/<_room_id>")
