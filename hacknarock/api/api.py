@@ -78,7 +78,7 @@ def add_message():
     message_author_id = data['author_id']
     message_room_id = data['room_id']
     message_data = data['data']
-    message_creation_date = datetime.utcnow()
+    message_creation_date = datetime.datetime.utcnow()
     #TODO VALIDATE
     new_message = Message(author_id=message_author_id, room_id=message_room_id, data=message_data, creation_date=message_creation_date)
     db.session.add(new_message)
