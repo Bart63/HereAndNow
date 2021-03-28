@@ -11,6 +11,9 @@ const AddEventForm = ({ onCancel, onAdd }) => {
     if (!text) {
       alert('Name is required!')
       return
+    } else if (text.length < 5) {
+      alert('Name must be atleast 5 letters long!')
+      return
     }
 
     onAdd(text)

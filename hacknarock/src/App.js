@@ -131,17 +131,21 @@ function App() {
 
   // Adding state
   const addEventDone = (lat, lng) => {
+    console.log("EVENT CHOSEN ON MAP - ASK FORM NAME")
     setAddingEventX(lat);
     setAddingEventY(lng);
-    setAddingEvent(2);
+    if (addingEvent === 1) setAddingEvent(2);
   };
 
   const cancelAddingEvent = () => {
+    console.log("CANCEL EVENT")
     setAddingEvent(0);
   }
 
   const addEventClick = () => {
-    setAddingEvent(addingEvent === 0 ? 1 : 0);
+    console.log("CHANGE EVENT REDINESS")
+    if (addingEvent === 0) setAddingEvent(1);
+    if (addingEvent === 1) setAddingEvent(0);
   };
 
   const showEventsClick = () => {

@@ -13,6 +13,9 @@ const Login = ({ onSet }) => {
 	  if (!text) {
 		alert('Username is required!')
 		return
+	  } else if (text.length < 5) {
+		alert('Username must be at least 5 character!')
+		return
 	  }
   
 	  onSet(text)
@@ -36,6 +39,7 @@ const Login = ({ onSet }) => {
 						<Button
 							variant="contained"
 							color="primary"
+							type="submit"
 							startIcon={<ArrowForwardIcon />}
 						/>
 						

@@ -50,7 +50,7 @@ const Chat = ({ onHide, name, messages, userid, onSend, roomid }) => {
 
           <div className="content">
             {messages.map((message) => (
-              <Message key={message.id} author={message.author_id} msg={message.data} date={message.creationDate} />
+              <Message key={message.id} author={message.author_id} msg={message.data} date={message.creation_date} />
             ))}
           </div>
 
