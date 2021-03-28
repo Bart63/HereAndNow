@@ -1,8 +1,9 @@
 import wikipedia
+from rev_geo import getCityFromLocation
 
-def getPhotoURL(name):
+def getPhotoURL(lat, lon):
     try:
-        page = wikipedia.page(name)
+        page = wikipedia.page(getCityFromLocation(lat, lon))
     except wikipedia.DisambiguationError:
         print("DisambiguationError: page resolved to Disambiguation page.")
         return ""

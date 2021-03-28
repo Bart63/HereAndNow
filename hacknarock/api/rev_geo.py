@@ -1,5 +1,6 @@
 from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent="hack")
-location = geolocator.reverse("50.049683, 19.944544")
+geolocator = Nominatim(user_agent="hacknarock")
 
-print(location.address)
+def getCityFromLocation(lat, lon):
+    location = geolocator.reverse(f"{lat}, {lon}")
+    return location.raw['address']['city']
