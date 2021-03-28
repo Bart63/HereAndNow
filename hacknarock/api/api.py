@@ -37,6 +37,12 @@ def add_room():
     return make_response({"res" : "Room Added", "img" : main_image}, 200)
 
 
+@app.route("/rooms/img/<_room_id>")
+def get_room_image_url(_room_id):
+    print(*map(Room.serialize, Room.query.filter_by(id=_room_id)))
+    return jsonify({"url" : [*map(Room.serialize, Room.query.filter_by(id=_room_id))][0]['main_image']})
+
+
 @app.route("/users")
 def get_users():
     return jsonify([*map(User.serialize, User.query.all())])
