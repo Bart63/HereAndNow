@@ -81,11 +81,12 @@ function App() {
       console.log(data["img"])
     });
 
-
     const getRooms = async () => {
       const roomsFromServer = await fetchRooms();
       setRooms(roomsFromServer);
     };
+
+    setAddingEvent(0);
 
     await getRooms()
   }

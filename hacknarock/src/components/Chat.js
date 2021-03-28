@@ -27,15 +27,13 @@ const Chat = ({ onHide, name, messages, userid, onSend, roomid }) => {
       const imageFromServer = await fetchImage(id);
       if (imageFromServer) setImg(imageFromServer);
     };
-
-    getImage();
+    getImage(roomid);
   }, []);
 
   const fetchImage = async (id) => {
     const res = await fetch("http://localhost:5000/rooms/img/" + roomid);
     const data = await res.json();
     const url = data['url']
-    console.log(url)
     return url;
   };
 
