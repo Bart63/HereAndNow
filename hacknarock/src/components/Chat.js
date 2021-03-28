@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, TextField } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,16 +12,32 @@ import Message from "./Message";
 
 const Chat = ({ onHide, name, messages, userid, onSend, roomid }) => {
 	const [text, setText] = useState('');
+	const [imgURL, setImg] = useState('');
   
 	const onSubmit = (e) => {
 	  e.preventDefault()
-  
 	  if (!text) return;
-  
 	  onSend(userid, text, roomid)
-  
 	  setText('')
 	}  
+
+  // Get image from server
+  useEffect(() => {
+    const getImage = async (id) => {
+      const imageFromServer = await fetchImage(id);
+      if (imageFromServer) setImg(imageFromServer);
+    };
+
+    getImage();
+  }, []);
+
+  const fetchImage = async (id) => {
+    const res = await fetch("http://localhost:5000/rooms/img/" + roomid);
+    const data = await res.json();
+    const url = data['url']
+    console.log(url)
+    return url;
+  };
 
   return (
     <>
@@ -47,6 +63,14 @@ const Chat = ({ onHide, name, messages, userid, onSend, roomid }) => {
               </AppBar>
             </div>
           </div>
+
+          
+            { imgURL && (
+            <div className="img_placeholder">
+              <img alt="room" src={imgURL} />
+            </div>
+            )}
+          
 
           <div className="content">
             {messages.map((message) => (
