@@ -67,9 +67,9 @@ if __name__=="__main__":
         messages.append(Message(author_id=2, room_id=2, data="Not in my code :(", 
         creation_date=datetime.datetime(2021, 3, 27, 16, 25, 32, 143)))
 
-        messages.append(Message(author_id=5, room_id=2, data="Is anybody here?", 
+        messages.append(Message(author_id=5, room_id=3, data="Is anybody here?", 
         creation_date=datetime.datetime(2021, 3, 27, 16, 26, 12, 123)))
-        messages.append(Message(author_id=5, room_id=2, data="...", 
+        messages.append(Message(author_id=5, room_id=3, data="...", 
         creation_date=datetime.datetime(2021, 3, 27, 16, 28, 23, 143)))
         
         for m in messages:
