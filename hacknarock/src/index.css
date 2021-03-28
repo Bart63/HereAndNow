@@ -133,6 +133,10 @@ code {
   justify-content:space-between;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .rooms-list {
   z-index: 3000;
   width: 300px;
