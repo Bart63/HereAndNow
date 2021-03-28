@@ -10,7 +10,7 @@ from censor import censor
 app = Flask(__name__)
 app.register_blueprint(upload_route)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test2.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 CORS(app)
 db.init_app(app)
 
