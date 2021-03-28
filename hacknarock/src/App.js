@@ -132,6 +132,13 @@ function App() {
 
   const hideChat = () => {
     setChatID(-1);
+
+    const getRooms = async () => {
+      const roomsFromServer = await fetchRooms();
+      setRooms(roomsFromServer);
+    };
+
+    getRooms()
   };
 
   // Adding state
