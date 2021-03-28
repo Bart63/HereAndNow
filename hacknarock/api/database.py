@@ -10,9 +10,10 @@ class Room(db.Model):
     position_x = db.Column(db.Float, nullable=False)
     position_y = db.Column(db.Float, nullable=False)
     password = db.Column(db.Text, nullable=False)
+    main_image = db.Column(db.Text)
 
     def __str__(self):
-        return f'{self.id} {self.name} {self.position_x} {self.position_y} {self.password}'
+        return f'{self.id} {self.name} {self.position_x} {self.position_y} {self.password} {self.main_image}'
 
     def serialize(self):
         return {
@@ -20,7 +21,8 @@ class Room(db.Model):
             'name' : self.name,
             'position_x' : self.position_x,
             'position_y' : self.position_y,
-            'password' : self.password
+            'password' : self.password,
+            'main_image' : self.main_image
         }
 
 

@@ -1,8 +1,8 @@
 import os
-import urllib.request
 from upload import app
-from flask import Flask, request, redirect, jsonify, Blueprint
+from flask import request, jsonify, json, Blueprint
 from werkzeug.utils import secure_filename
+from database import Room
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -26,6 +26,11 @@ def upload_file():
 		filename = secure_filename(file.filename)
 		path_to_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 		file.save(path_to_file)
+		data = json.loads(request.data)
+		room_id = data['room_id']
+		room = Room.query.get(room_id)
+		room.main_image = path_to_file
+		db.session.commit()
 		resp = jsonify({'message' : 'File successfully uploaded'})
 		resp.status_code = 201
 		return resp
@@ -33,6 +38,3 @@ def upload_file():
 		resp = jsonify({'message' : 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'})
 		resp.status_code = 400
 		return resp
-
-if __name__ == "__main__":
-    app.run()
