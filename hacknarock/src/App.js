@@ -51,7 +51,9 @@ function App() {
       },
       body: JSON.stringify(user)
     })
-    .then(response => { console.log(response.json()); })
+    .then((response) => response.json()).then(function(data) {
+      console.log(data.Id)
+    })
   }
 
   // Get rooms from server
