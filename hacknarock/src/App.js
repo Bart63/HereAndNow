@@ -76,7 +76,11 @@ function App() {
         'Content-type': 'application/json'
       },
       body: JSON.stringify(room)
+    })
+    .then((response) => response.json()).then(function(data) {
+      console.log(data["img"])
     });
+
 
     const getRooms = async () => {
       const roomsFromServer = await fetchRooms();

@@ -1,5 +1,6 @@
 import wikipedia
 from rev_geo import getCityFromLocation
+import random
 
 def getPhotoURL(lat, lon):
     try:
@@ -17,4 +18,10 @@ def getPhotoURL(lat, lon):
         print("HTTPTimeoutError: a request to the Mediawiki servers timed out")
         return ""
         
-    return(page.images[0])
+    images_except = [url for url in page.images
+                            if not url.endswith("Decrease2.svg")]
+
+    if not images_except:
+        return ""
+
+    return(random.choice(images_except))
