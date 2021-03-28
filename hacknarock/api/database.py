@@ -59,10 +59,10 @@ class Message(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), nullable=False)
     data = db.Column(db.Text, nullable=False)
-    creationDate = db.Column(db.DateTime, nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False)
 
     def __str__(self):
-        return f'{self.id} {self.author_id} {self.room_id} {self.data} {self.creationDate}'
+        return f'{self.id} {self.author_id} {self.room_id} {self.data} {self.creation_date}'
 
     def serialize(self):
         return {
@@ -70,5 +70,5 @@ class Message(db.Model):
             'author_id' : self.author_id,
             'room_id' : self.room_id,
             'data' : self.data,
-            'creationDate' : self.creationDate
+            'creation_date' : self.creation_date
         }

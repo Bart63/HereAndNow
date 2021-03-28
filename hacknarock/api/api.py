@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, jsonify, json, request, make_response
 from sqlalchemy.orm import load_only
 from database import db, Room, User, RoomUser, Message
@@ -69,6 +70,20 @@ def get_room_users_by_room_id(_room_id):
 @app.route("/messages")
 def get_messages():
     return jsonify([*map(Message.serialize, Message.query.all())])
+
+
+@app.route("/messages/add", methods=['POST'])
+def add_message():
+    data = json.loads(request.data)
+    message_author_id = data['author_id']
+    message_room_id = data['room_id']
+    message_data = data['data']
+    message_creation_date = datetime.datetime.utcnow()
+    #TODO VALIDATE
+    new_message = Message(author_id=message_author_id, room_id=message_room_id, data=message_data, creation_date=message_creation_date)
+    db.session.add(new_message)
+    db.session.commit()
+    return make_response("Message Added", 200)
 
 
 @app.route("/messages/<_room_id>")

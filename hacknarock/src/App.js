@@ -14,14 +14,45 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [roomsList, setRoomsList] = useState(true);
   const [login, setLogin] = useState('');
+  const [userid, setID] = useState('');
   const [addingEvent, setAddingEvent] = useState(0);
   const [addingEventX, setAddingEventX] = useState(0);
   const [addingEventY, setAddingEventY] = useState(0);
 
+  const getCurrentDate = (separator='-') => {
+    let newDate = new Date();
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    let hours = newDate.getHours() < 10 ? "0" + newDate.getHours() : newDate.getHours();
+    let minutes = newDate.getMinutes() < 10 ? "0" + newDate.getMinutes() : newDate.getMinutes();
+    let time = hours + ":" + minutes;
+  
+    return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date<10?`0${date}`:`${date}`} ${time}`;
+  }
+
   // Login
   const setLoginForm = (log) => {
     setLogin(log)
+    addLogin(log)
   };
+
+  // Add room
+  const addLogin = async (log) => {
+    
+    const user = {
+      name: log,
+    }
+
+    const res = await fetch("http://localhost:5000/users/add", {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(response => { console.log(response.json()); })
+  }
 
   // Get rooms from server
   const getRooms = async () => {
@@ -49,8 +80,6 @@ function App() {
       position_y: addingEventY,
     }
 
-    console.log(JSON.stringify(room))
-
     const res = await fetch("http://localhost:5000/rooms/add", {
       method: 'POST',
       headers: {
@@ -74,10 +103,26 @@ function App() {
     return data;
   };
 
+  const sendMessage = async (userid, roomid, msg) => { 
+    const message = {
+      author_id: 0,//userid,
+      data: 'msg',
+      room_id: 1
+    }
+
+    const res = await fetch("http://localhost:5000/message/add", {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(message)
+    });
+
+    await getMessages(roomid);
+  }
+
   // Chat state
   const showChat = async (id, name) => {
-    console.log(id);
-
     await getMessages(id);
     setChatID(id);
     setChatName(name);
@@ -85,7 +130,6 @@ function App() {
 
   const hideChat = () => {
     setChatID(-1);
-    console.log(-1);
   };
 
   // Adding state
