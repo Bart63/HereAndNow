@@ -60,6 +60,18 @@ def get_room_users():
     return jsonify([*map(RoomUser.serialize, RoomUser.query.all())])
 
 
+@app.route("/roomusers/add", methods=['POST'])
+def add_user_to_room():
+    data = json.loads(request.data)
+    room_user_room_id = data['room_id']
+    room_user_user_id = data['user_id']
+    #TODO VALIDATE
+    new_room_user = RoomUser(room_id=room_user_room_id, user_id=room_user_user_id)
+    db.session.add(new_room_user)
+    db.session.commit()
+    return make_response("User added to room", 200)
+
+
 @app.route("/roomusers/<_room_id>")
 def get_room_users_by_room_id(_room_id):
     user_ids = [r.user_id for r in RoomUser.query.options(load_only("user_id")).filter_by(room_id=_room_id)]
