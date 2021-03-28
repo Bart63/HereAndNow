@@ -14,7 +14,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [roomsList, setRoomsList] = useState(true);
   const [login, setLogin] = useState('');
-  const [userid, setID] = useState('');
+  const [userid, setID] = useState(-1);
   const [addingEvent, setAddingEvent] = useState(0);
   const [addingEventX, setAddingEventX] = useState(0);
   const [addingEventY, setAddingEventY] = useState(0);
@@ -98,14 +98,16 @@ function App() {
     return data;
   };
 
-  const sendMessage = async (userid, roomid, msg) => { 
+  const sendMessage = async (userid, msg, roomid) => { 
     const message = {
       author_id: userid,
       data: msg,
       room_id: roomid
     }
 
-    const res = await fetch("http://localhost:5000/message/add", {
+    console.log(message)
+
+    const res = await fetch("http://localhost:5000/messages/add", {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -151,7 +153,7 @@ function App() {
     <div>
       <div className="wrapper">
         <Map rooms={rooms} onClick={showChat} addingEvent={addingEvent} onMapClick={addEventDone} />
-        {chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} userid={userid} onSend={sendMessage} />}
+        {chatID !== -1 && <Chat onHide={hideChat} name={chatName} messages={messages} userid={userid} onSend={sendMessage} roomid={chatID} />}
 
         <ButtonsContainer
           addingEvent={addingEvent}
