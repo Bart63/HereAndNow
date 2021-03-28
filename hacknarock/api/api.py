@@ -9,7 +9,7 @@ from upload_api import upload_route
 app = Flask(__name__)
 app.register_blueprint(upload_route)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test2.db'
 CORS(app)
 db.init_app(app)
 
