@@ -50,6 +50,10 @@ code {
   display: flex;
 }
 
+form.message {
+  display: flex;
+}
+
 .chat {
   width: 400px;
   z-index: 1500;

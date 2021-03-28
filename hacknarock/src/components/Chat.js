@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Paper, TextField } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,7 +10,19 @@ import Button from "@material-ui/core/Button";
 import Shadow from "./Shadow";
 import Message from "./Message";
 
-const Chat = ({ onHide, name, messages, userid, onSend }) => {
+const Chat = ({ onHide, name, messages, userid, onSend, roomid }) => {
+	const [text, setText] = useState('');
+  
+	const onSubmit = (e) => {
+	  e.preventDefault()
+  
+	  if (!text) return;
+  
+	  onSend(userid, text, roomid)
+  
+	  setText('')
+	}  
+
   return (
     <>
       <Shadow />
@@ -41,20 +54,23 @@ const Chat = ({ onHide, name, messages, userid, onSend }) => {
             ))}
           </div>
 
-          <div className="message">
-            <TextField
-              id="msg"
-              label="Aa"
-              variant="outlined"
-              className="flex-grow"
-            />
+		  <form className="message" onSubmit={onSubmit}>
+				<TextField
+				id="msg"
+				label="Aa"
+				variant="outlined"
+				className="flex-grow"
+				value={text}
+                onChange={(e) => setText(e.target.value)}
+				/>
 
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<SendIcon />}
-            />
-          </div>
+				<Button
+				variant="contained"
+				color="primary"
+				type="submit"
+				startIcon={<SendIcon />}
+				/>
+          </form>
         </Paper>
       </div>
     </>
