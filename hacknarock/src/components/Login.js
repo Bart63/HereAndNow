@@ -1,22 +1,10 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Paper, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Button from '@material-ui/core/Button';
 import Shadow from './Shadow'
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-	  flexGrow: 1,
-	},
-	title: {
-	  flexGrow: 1,
-	},
-}));
-
 const Login = ({ onSet }) => {
-	const classes = useStyles();
-
 	const [text, setText] = useState('');
   
 	const onSubmit = (e) => {
@@ -43,7 +31,7 @@ const Login = ({ onSet }) => {
 						
 						<TextField id="login" label="Type in Your username" 
 						value={text} onChange={(e) => setText(e.target.value)}
-						variant="outlined" className={classes.root} />
+						variant="outlined" className="flex-grow" />
 
 						<Button
 							variant="contained"

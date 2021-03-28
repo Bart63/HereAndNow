@@ -1,5 +1,5 @@
+import React, { useState } from "react";
 import { Paper, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -10,17 +10,18 @@ import Button from "@material-ui/core/Button";
 import Shadow from "./Shadow";
 import Message from "./Message";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
-
-const Chat = ({ onHide, name, messages }) => {
-	const classes = useStyles();
+const Chat = ({ onHide, name, messages, userid, onSend, roomid }) => {
+	const [text, setText] = useState('');
+  
+	const onSubmit = (e) => {
+	  e.preventDefault()
+  
+	  if (!text) return;
+  
+	  onSend(userid, text, roomid)
+  
+	  setText('')
+	}  
 
   return (
     <>
@@ -28,16 +29,16 @@ const Chat = ({ onHide, name, messages }) => {
       <div className="chat">
         <Paper elevation={3}>
           <div className="top">
-            <div className={classes.root}>
+            <div className="flex-grow">
               <AppBar position="static">
                 <Toolbar>
-                  <Typography variant="h6" className={classes.title}>
+                  <Typography variant="h6" className="flex-grow">
                     {name}
                   </Typography>
                   <IconButton
                     color="inherit"
                     aria-label="close"
-                    className={classes.menuButton}
+                    className="flex-grow"
                     onClick={onHide}
                   >
                     <CloseIcon />
@@ -53,20 +54,23 @@ const Chat = ({ onHide, name, messages }) => {
             ))}
           </div>
 
-          <div className="message">
-            <TextField
-              id="msg"
-              label="Aa"
-              variant="outlined"
-              className={classes.root}
-            />
+		  <form className="message" onSubmit={onSubmit}>
+				<TextField
+				id="msg"
+				label="Aa"
+				variant="outlined"
+				className="flex-grow"
+				value={text}
+                onChange={(e) => setText(e.target.value)}
+				/>
 
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<SendIcon />}
-            />
-          </div>
+				<Button
+				variant="contained"
+				color="primary"
+				type="submit"
+				startIcon={<SendIcon />}
+				/>
+          </form>
         </Paper>
       </div>
     </>

@@ -50,6 +50,10 @@ code {
   display: flex;
 }
 
+form.message {
+  display: flex;
+}
+
 .chat {
   width: 400px;
   z-index: 1500;
@@ -131,6 +135,10 @@ code {
   display: flex;
   align-items: center;
   justify-content:space-between;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 .rooms-list {

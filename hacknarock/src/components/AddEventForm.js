@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Paper, TextField, Button } from "@material-ui/core";
 import Shadow from "./Shadow";
 
