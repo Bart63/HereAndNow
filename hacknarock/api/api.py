@@ -5,6 +5,7 @@ from database import db, Room, User, RoomUser, Message
 from flask_cors import CORS
 from upload_api import upload_route
 from censor import censor
+from wiki_img import getPhotoURL
 
 
 app = Flask(__name__)
@@ -27,11 +28,13 @@ def add_room():
     room_position_x = data['position_x']
     room_position_y = data['position_y']
     room_password = data['password']
+    main_image = getPhotoURL(room_position_x, room_position_y)
     #TODO VALIDATE
-    new_room = Room(name=room_name, position_x=room_position_x, position_y=room_position_y, password=room_password)
+    new_room = Room(name=room_name, position_x=room_position_x, position_y=room_position_y, password=room_password,
+     main_image=main_image)
     db.session.add(new_room)
     db.session.commit()
-    return make_response("Room Added", 200)
+    return make_response({"res" : "Room Added", "img" : main_image}, 200)
 
 
 @app.route("/users")
