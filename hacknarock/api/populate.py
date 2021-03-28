@@ -15,13 +15,17 @@ if __name__=="__main__":
         ############## Room ##############
         rooms = []
         rooms.append(Room(name="Spotkanie projektowe", 
-                        position_x=10, position_y=32, password="123"))
+                        position_x=10, position_y=32, password="123",
+                        main_image="https://lh3.googleusercontent.com/X_zIVLHvNgEiQMaCY8BdMgl-MSpNCtI-QDNFt5VIBY9tz2a4MV9s8jN_QXwi7pKxm5H9jUQ3XiqBV8hOIv2VYQrB=w808-h768"))
         rooms.append(Room(name="Hacknarök 5", 
-                        position_x=50.049683, position_y=19.944544, password=""))
+                        position_x=50.049683, position_y=19.944544, password="",
+                        main_image="https://cdn.bulldogjob.com/system/readables/covers/000/002/726/thumb/Hacknar%C3%B6k__czyli_pi%C4%85ta_ods%C5%82ona_boskiej_batalii_o_wieczn%C4%85_chwa%C5%82%C4%99!.png"))
         rooms.append(Room(name="Daily Scrum", 
-                        position_x=-20, position_y=-2, password="scrum"))
+                        position_x=-20, position_y=-2, password="scrum",
+                        main_image="https://www.corazlepszafirma.pl/img/Co_to_jest_projekt.jpg"))
         rooms.append(Room(name="Empty?", 
-                        position_x=-60, position_y=-40, password=""))
+                        position_x=-60, position_y=-40, password="",
+                        main_image="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Caixatecido.jpg/1280px-Caixatecido.jpg"))
         
         for room in rooms:
             db.session.add(room)
