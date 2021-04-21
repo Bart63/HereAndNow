@@ -1,6 +1,8 @@
 # HereAndNow \[**Hacknarök 5**\]
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/HXZt3dZQa6A/0.jpg)](https://www.youtube.com/watch?v=HXZt3dZQa6A)
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=HXZt3dZQa6A"><img src="https://img.youtube.com/vi/HXZt3dZQa6A/0.jpg" alt="Demo preview on Youtube"></a>
+</p>
 
 ## Inspiration
 Thinking about the topic of the hackathon, we came up with an idea to connect people during this difficult time. Few minutes, and "Here & now" was born.
