@@ -1,7 +1,7 @@
 # HereAndNow \[**Hacknarök 5**\]
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=HXZt3dZQa6A"><img src="https://img.youtube.com/vi/HXZt3dZQa6A/0.jpg" alt="Demo preview on Youtube"></a>
+  <a href="https://www.youtube.com/watch?v=HXZt3dZQa6A"><img src="https://github.com/Bart63/HereAndNow/blob/main/Thumbnail.png" alt="Demo preview on Youtube"></a>
 </p>
 
 ## Inspiration
